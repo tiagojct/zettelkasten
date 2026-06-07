@@ -6,7 +6,41 @@ title: "Zettelkasten"
   <p class="index-description">Bloco de notas público. {{ collections.notas.length }} notas, {{ collections.tagsList.length }} temas.</p>
 </section>
 
+<section class="index-about">
+  <h2>O que é isto</h2>
+  <p>Um <em>Zettelkasten</em> (caixa de notas) é um sistema de pensamento não-linear: em vez de publicar artigos acabados por ordem cronológica, escrevo notas atómicas que se ligam umas às outras. Cada nota tem um identificador único baseado no momento em que foi criada (<code>AAAAMMDDHHmmss</code>) e pode ser descoberta seguindo ligações, explorando temas ou percorrendo o grafo.</p>
+
+  <h2>Estágios de maturidade</h2>
+  <p>As notas não nascem prontas. Evoluem com o tempo:</p>
+  <dl class="maturity-defs">
+    <dt><span class="maturity maturity-seedling">seedling</span></dt>
+    <dd>Ideia inicial, ainda crua. Poucas frases, muita curiosidade. Pode conter imprecisões.</dd>
+    <dt><span class="maturity maturity-budding">budding</span></dt>
+    <dd>Em crescimento. Já tem estrutura, referências e ligações a outras notas.</dd>
+    <dt><span class="maturity maturity-evergreen">evergreen</span></dt>
+    <dd>Madura, revista, com profundidade. Continua a crescer, mas já tem corpo.</dd>
+  </dl>
+
+  <h2>Convenções</h2>
+  <ul>
+    <li><strong>Língua:</strong> Português (PT-PT), salvo citações ou termos técnicos.</li>
+    <li><strong>Formato:</strong> Markdown com frontmatter YAML. As ligações entre notas usam <code>[[wikilinks]]</code>.</li>
+    <li><strong>Tags:</strong> Definidas no frontmatter. Cada nota pode ter várias. A página de <a href="{{ '/tags/' | url }}">temas</a> agrupa tudo.</li>
+    <li><strong>Grafo:</strong> Visualização das ligações entre notas. Clica num nó para abrir a nota correspondente.</li>
+  </ul>
+
+  <h2>Como navegar</h2>
+  <ul>
+    <li><strong>Feed cronológico</strong> — esta página. As notas mais recentes primeiro.</li>
+    <li><strong><a href="{{ '/tags/' | url }}">Temas</a></strong> — nuvem de tags. Clica numa para ver todas as notas com esse tema.</li>
+    <li><strong><a href="{{ '/grafo/' | url }}">Grafo</a></strong> — mapa visual de todas as notas e ligações. Arrasta para explorar.</li>
+    <li><strong>Ligações e backlinks</strong> — no fundo de cada nota encontras as notas que ela cita e as que a citam.</li>
+    <li><strong><a href="{{ '/aleatoria/' | url }}">Aleatória</a></strong> — salta para uma nota ao acaso.</li>
+  </ul>
+</section>
+
 <section class="note-feed">
+  <h2>Notas</h2>
   {% for n in collections.notas %}
     <article class="feed-item">
       <div class="feed-item-meta">

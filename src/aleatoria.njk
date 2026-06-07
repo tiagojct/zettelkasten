@@ -7,7 +7,7 @@ eleventyComputed:
 <html lang="pt-PT">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0;url=/notas/{{ randomId }}/">
+  <meta http-equiv="refresh" content="0;url={{ ('/notas/' + randomId + '/') | url }}">
   <title>Nota aleatória...</title>
 </head>
 <body>

@@ -5,22 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title if title else "Zettelkasten público" }}{{ " — caderno de notas" if not title else "" }}</title>
   <meta name="description" content="Bloco de notas público de Tiago Jacinto. Zettelkasten aberto.">
-  <link rel="stylesheet" href="/css/style.css">
-  {% set isNotePage = page.url and '/notas/' in page.url %}
-  {% set isGrafoPage = page.url and page.url == '/grafo/' %}
-  {% if isNotePage or isGrafoPage %}
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+  {% if page.url %}
+  {% set isNotePage = page.url | replace('/zettelkasten/', '/') %}
+  {% set isNote = '/notas/' in isNotePage %}
+  {% set isGrafo = '/grafo/' in page.url %}
+  {% else %}
+  {% set isNote = false %}
+  {% set isGrafo = false %}
+  {% endif %}
+  {% if isNote or isGrafo %}
   <script src="https://d3js.org/d3.v7.min.js"></script>
   {% endif %}
 </head>
 <body>
+  <script>window.ZETTEL_BASE = "/zettelkasten";</script>
   <header class="site-header">
     <nav class="site-nav">
-      <a href="/" class="nav-brand">Zettelkasten</a>
+      <a href="{{ '/' | url }}" class="nav-brand">Zettelkasten</a>
       <span class="nav-sep" aria-hidden="true">·</span>
-      <a href="/">notas</a>
-      <a href="/tags/">temas</a>
-      <a href="/grafo/">grafo</a>
-      <a href="/aleatoria/" class="nav-random" title="Nota aleatória">aleatória</a>
+      <a href="{{ '/' | url }}">notas</a>
+      <a href="{{ '/tags/' | url }}">temas</a>
+      <a href="{{ '/grafo/' | url }}">grafo</a>
+      <a href="{{ '/aleatoria/' | url }}" class="nav-random" title="Nota aleatória">aleatória</a>
     </nav>
   </header>
   <main class="site-main">

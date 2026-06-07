@@ -103,7 +103,7 @@
     })
     .on("click", (_event, d) => {
       if (d.id !== center.id) {
-        window.location.href = "/notas/" + d.id + "/";
+        window.location.href = (window.ZETTEL_BASE || "") + "/notas/" + d.id + "/";
       }
     });
 

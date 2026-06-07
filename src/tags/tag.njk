@@ -10,7 +10,7 @@ eleventyComputed:
   title: "Tema: {{ tagData.tag }}"
 ---
 <nav class="note-breadcrumb">
-  <a href="/tags/">← todos os temas</a>
+  <a href="{{ '/tags/' | url }}">← todos os temas</a>
 </nav>
 
 <h1 class="tag-page-title">Notas com o tema «{{ tagData.tag }}»</h1>
@@ -24,7 +24,7 @@ eleventyComputed:
         {% if n.data.maturity %}<span class="maturity maturity-{{ n.data.maturity }}">{{ n.data.maturity }}</span>{% endif %}
       </div>
       <h2 class="feed-item-title">
-        <a href="/notas/{{ n.data.id }}/">{{ n.data.title }}</a>
+        <a href="{{ ('/notas/' + n.data.id + '/') | url }}">{{ n.data.title }}</a>
       </h2>
     </article>
   {% endfor %}

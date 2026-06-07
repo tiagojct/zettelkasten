@@ -81,7 +81,7 @@
         .attr("r", d.radius);
     })
     .on("click", (_event, d) => {
-      window.location.href = "/notas/" + d.id + "/";
+      window.location.href = (window.ZETTEL_BASE || "") + "/notas/" + d.id + "/";
     })
     .call(
       d3

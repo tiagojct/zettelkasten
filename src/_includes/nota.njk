@@ -3,7 +3,7 @@ layout: base
 ---
 <article class="note">
   <nav class="note-breadcrumb">
-    <a href="/">← todas as notas</a>
+    <a href="{{ '/' | url }}">← todas as notas</a>
   </nav>
 
   <header class="note-header">
@@ -12,7 +12,7 @@ layout: base
       {% if date %}<time datetime="{{ date | isoDate }}">{{ date | formatDate }}</time>{% endif %}
       <span class="maturity maturity-{{ maturity }}">{{ maturity }}</span>
       {% for tag in tags %}
-        <a href="/tags/{{ tag }}/" class="tag">{{ tag }}</a>
+        <a href="{{ ('/tags/' + tag + '/') | url }}" class="tag">{{ tag }}</a>
       {% endfor %}
     </div>
   </header>
@@ -27,7 +27,7 @@ layout: base
     <ul class="link-list">
       {% for n in linkedNotes %}
         <li>
-          <a href="/notas/{{ n.id }}/">{{ n.title }}</a>
+          <a href="{{ ('/notas/' + n.id + '/') | url }}">{{ n.title }}</a>
           {% if n.maturity %}<span class="maturity maturity-{{ n.maturity }}">{{ n.maturity }}</span>{% endif %}
         </li>
       {% endfor %}
@@ -41,7 +41,7 @@ layout: base
     <ul class="link-list backlink-list">
       {% for bl in backlinks %}
         <li>
-          <a href="/notas/{{ bl.id }}/">{{ bl.title }}</a>
+          <a href="{{ ('/notas/' + bl.id + '/') | url }}">{{ bl.title }}</a>
           {% if bl.maturity %}<span class="maturity maturity-{{ bl.maturity }}">{{ bl.maturity }}</span>{% endif %}
         </li>
       {% endfor %}
@@ -74,5 +74,5 @@ layout: base
     ]
   }
   </script>
-  <script src="/js/mini-grafo.js" defer></script>
+  <script src="{{ '/js/mini-grafo.js' | url }}" defer></script>
 </article>

@@ -1,7 +1,8 @@
 // Global id-to-title map populated by _data/notas.js before templates render
 globalThis.__zettelIdMap = {};
+globalThis.__zettelPrefix = "";
 
-function wikilinkPlugin(md, lookupFn) {
+function wikilinkPlugin(md, lookupFn, getPrefix) {
   const defaultRender =
     md.renderer.rules.link_open ||
     function (tokens, idx, options, _env, self) {
@@ -9,6 +10,7 @@ function wikilinkPlugin(md, lookupFn) {
     };
 
   md.core.ruler.before("normalize", "wikilink", (state) => {
+    const prefix = getPrefix ? getPrefix() : "";
     state.src = state.src.replace(
       /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
       (_, target, display) => {
@@ -21,17 +23,20 @@ function wikilinkPlugin(md, lookupFn) {
             ? entry.title
             : id;
         const slug = entry ? (entry.slug || id) : id;
-        return `[${title}](/notas/${slug}/)`;
+        return `[${title}](${prefix}/notas/${slug}/)`;
       },
     );
   });
 }
 
 module.exports = function (eleventyConfig) {
+  // Set prefix for markdown-it wikilink plugin
+  globalThis.__zettelPrefix = "/zettelkasten";
+
   // --- Markdown with wikilinks ---
   const markdownIt = require("markdown-it");
   const md = markdownIt({ html: true, breaks: false, linkify: true });
-  md.use(wikilinkPlugin, () => globalThis.__zettelIdMap);
+  md.use(wikilinkPlugin, () => globalThis.__zettelIdMap, () => globalThis.__zettelPrefix);
   eleventyConfig.setLibrary("md", md);
 
   // --- Passthrough copies ---
@@ -112,5 +117,6 @@ module.exports = function (eleventyConfig) {
     },
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
+    pathPrefix: "/zettelkasten/",
   };
 };

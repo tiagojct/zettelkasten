@@ -14,12 +14,12 @@ title: "Zettelkasten"
         {% if n.data.maturity %}<span class="maturity maturity-{{ n.data.maturity }}">{{ n.data.maturity }}</span>{% endif %}
       </div>
       <h2 class="feed-item-title">
-        <a href="/notas/{{ n.data.id }}/">{{ n.data.title }}</a>
+        <a href="{{ ('/notas/' + n.data.id + '/') | url }}">{{ n.data.title }}</a>
       </h2>
       {% if n.data.tags.length > 0 %}
       <div class="feed-item-tags">
         {% for tag in n.data.tags %}
-          <a href="/tags/{{ tag }}/" class="tag">{{ tag }}</a>
+          <a href="{{ ('/tags/' + tag + '/') | url }}" class="tag">{{ tag }}</a>
         {% endfor %}
       </div>
       {% endif %}

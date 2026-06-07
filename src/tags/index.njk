@@ -12,7 +12,7 @@ pagination:
 
 <section class="tags-cloud">
   {% for t in allTags %}
-    <a href="/tags/{{ t.tag }}/" class="tag tag-large" style="font-size: {{ 0.85 + (t.count / collections.notas.length) * 1.2 }}rem;">
+    <a href="{{ ('/tags/' + t.tag + '/') | url }}" class="tag tag-large" style="font-size: {{ 0.85 + (t.count / collections.notas.length) * 1.2 }}rem;">
       {{ t.tag }}
       <span class="tag-count">{{ t.count }}</span>
     </a>

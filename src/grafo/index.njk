@@ -1,0 +1,17 @@
+---
+layout: base
+title: "Grafo"
+---
+<section class="grafo-intro">
+  <p class="grafo-description">Cada ponto é uma nota. Arrasta para explorar. Clica para abrir.</p>
+</section>
+
+<section class="grafo-canvas">
+  <svg id="grafo-svg"></svg>
+  <div id="grafo-tooltip" class="grafo-tooltip" aria-hidden="true"></div>
+</section>
+
+<script type="application/json" id="grafo-data">
+{{ grafo | dump | safe }}
+</script>
+<script src="/js/grafo.js" defer></script>

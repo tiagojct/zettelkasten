@@ -1,0 +1,31 @@
+---
+layout: base
+pagination:
+  data: collections.tagsList
+  size: 1
+  alias: tagData
+  addAllPagesToCollections: true
+permalink: "/tags/{{ tagData.tag }}/"
+eleventyComputed:
+  title: "Tema: {{ tagData.tag }}"
+---
+<nav class="note-breadcrumb">
+  <a href="/tags/">← todos os temas</a>
+</nav>
+
+<h1 class="tag-page-title">Notas com o tema «{{ tagData.tag }}»</h1>
+<p class="tag-page-count">{{ collections.notasByTag[tagData.tag].length }} nota{% if collections.notasByTag[tagData.tag].length != 1 %}s{% endif %}</p>
+
+<section class="note-feed">
+  {% for n in collections.notasByTag[tagData.tag] %}
+    <article class="feed-item">
+      <div class="feed-item-meta">
+        {% if n.data.date %}<time datetime="{{ n.data.date | isoDate }}">{{ n.data.date | formatDate }}</time>{% endif %}
+        {% if n.data.maturity %}<span class="maturity maturity-{{ n.data.maturity }}">{{ n.data.maturity }}</span>{% endif %}
+      </div>
+      <h2 class="feed-item-title">
+        <a href="/notas/{{ n.data.id }}/">{{ n.data.title }}</a>
+      </h2>
+    </article>
+  {% endfor %}
+</section>

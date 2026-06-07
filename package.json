@@ -1,0 +1,21 @@
+{
+  "name": "zettelkasten",
+  "version": "0.1.0",
+  "description": "Zettelkasten público — bloco de notas aberto de Tiago Jacinto",
+  "private": true,
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "dev": "npx @11ty/eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "keywords": ["zettelkasten", "11ty", "eleventy", "digital-garden"],
+  "author": "Tiago Jacinto",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "d3": "^7.9.0",
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^14.1.0"
+  }
+}

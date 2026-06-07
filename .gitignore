@@ -1,0 +1,15 @@
+# Build output
+_site/
+.quartz-cache/
+
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~

@@ -1,0 +1,16 @@
+---
+permalink: /aleatoria/
+eleventyComputed:
+  randomId: "{{ collections.notas | randomId }}"
+---
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=/notas/{{ randomId }}/">
+  <title>Nota aleatória...</title>
+</head>
+<body>
+  <p>A redireccionar para uma nota aleatória...</p>
+</body>
+</html>

@@ -1,0 +1,78 @@
+---
+layout: base
+---
+<article class="note">
+  <nav class="note-breadcrumb">
+    <a href="/">← todas as notas</a>
+  </nav>
+
+  <header class="note-header">
+    <h1>{{ title }}</h1>
+    <div class="note-meta">
+      {% if date %}<time datetime="{{ date | isoDate }}">{{ date | formatDate }}</time>{% endif %}
+      <span class="maturity maturity-{{ maturity }}">{{ maturity }}</span>
+      {% for tag in tags %}
+        <a href="/tags/{{ tag }}/" class="tag">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  </header>
+
+  <div class="note-body">
+    {{ content | safe }}
+  </div>
+
+  {% if linkedNotes.length > 0 %}
+  <section class="note-links">
+    <h2>Ligações</h2>
+    <ul class="link-list">
+      {% for n in linkedNotes %}
+        <li>
+          <a href="/notas/{{ n.id }}/">{{ n.title }}</a>
+          {% if n.maturity %}<span class="maturity maturity-{{ n.maturity }}">{{ n.maturity }}</span>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  {% if backlinks.length > 0 %}
+  <section class="note-backlinks">
+    <h2>Notas que ligam a esta</h2>
+    <ul class="link-list backlink-list">
+      {% for bl in backlinks %}
+        <li>
+          <a href="/notas/{{ bl.id }}/">{{ bl.title }}</a>
+          {% if bl.maturity %}<span class="maturity maturity-{{ bl.maturity }}">{{ bl.maturity }}</span>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
+  <section class="note-mini-grafo">
+    <h2>Vizinhança</h2>
+    <div id="mini-grafo-container" class="mini-grafo"></div>
+  </section>
+
+  <script type="application/json" id="mini-grafo-data">
+  {
+    "center": {
+      "id": "{{ id }}",
+      "title": {{ title | dump | safe }},
+      "maturity": "{{ maturity }}",
+      "tags": {{ tags | dump | safe }}
+    },
+    "linked": [
+      {% for n in linkedNotes %}
+        {"id": "{{ n.id }}", "title": {{ n.title | dump | safe }}, "maturity": "{{ n.maturity }}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ],
+    "backlinks": [
+      {% for bl in backlinks %}
+        {"id": "{{ bl.id }}", "title": {{ bl.title | dump | safe }}, "maturity": "{{ bl.maturity }}"}{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
+  <script src="/js/mini-grafo.js" defer></script>
+</article>

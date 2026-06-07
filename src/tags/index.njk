@@ -1,0 +1,20 @@
+---
+layout: base
+title: "Temas"
+pagination:
+  data: collections.tagsList
+  size: 50
+  alias: allTags
+---
+<section class="tags-intro">
+  <p class="tags-description">{{ allTags.length }} temas no caderno.</p>
+</section>
+
+<section class="tags-cloud">
+  {% for t in allTags %}
+    <a href="/tags/{{ t.tag }}/" class="tag tag-large" style="font-size: {{ 0.85 + (t.count / collections.notas.length) * 1.2 }}rem;">
+      {{ t.tag }}
+      <span class="tag-count">{{ t.count }}</span>
+    </a>
+  {% endfor %}
+</section>

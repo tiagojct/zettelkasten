@@ -1,0 +1,28 @@
+---
+layout: base
+title: "Zettelkasten"
+---
+<section class="index-intro">
+  <p class="index-description">Bloco de notas público. {{ collections.notas.length }} notas, {{ collections.tagsList.length }} temas.</p>
+</section>
+
+<section class="note-feed">
+  {% for n in collections.notas %}
+    <article class="feed-item">
+      <div class="feed-item-meta">
+        {% if n.data.date %}<time datetime="{{ n.data.date | isoDate }}">{{ n.data.date | formatDate }}</time>{% endif %}
+        {% if n.data.maturity %}<span class="maturity maturity-{{ n.data.maturity }}">{{ n.data.maturity }}</span>{% endif %}
+      </div>
+      <h2 class="feed-item-title">
+        <a href="/notas/{{ n.data.id }}/">{{ n.data.title }}</a>
+      </h2>
+      {% if n.data.tags.length > 0 %}
+      <div class="feed-item-tags">
+        {% for tag in n.data.tags %}
+          <a href="/tags/{{ tag }}/" class="tag">{{ tag }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </article>
+  {% endfor %}
+</section>

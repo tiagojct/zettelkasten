@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title if title else "Zettelkasten público" }}{{ " — caderno de notas" if not title else "" }}</title>
+  <meta name="description" content="Bloco de notas público de Tiago Jacinto. Zettelkasten aberto.">
+  <link rel="stylesheet" href="/css/style.css">
+  {% set isNotePage = page.url and '/notas/' in page.url %}
+  {% set isGrafoPage = page.url and page.url == '/grafo/' %}
+  {% if isNotePage or isGrafoPage %}
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  {% endif %}
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="/" class="nav-brand">Zettelkasten</a>
+      <span class="nav-sep" aria-hidden="true">·</span>
+      <a href="/">notas</a>
+      <a href="/tags/">temas</a>
+      <a href="/grafo/">grafo</a>
+      <a href="/aleatoria/" class="nav-random" title="Nota aleatória">aleatória</a>
+    </nav>
+  </header>
+  <main class="site-main">
+    {{ content | safe }}
+  </main>
+  <footer class="site-footer">
+    <p>Zettelkasten público de <a href="https://tiagojct.eu">Tiago Jacinto</a>.</p>
+  </footer>
+</body>
+</html>
